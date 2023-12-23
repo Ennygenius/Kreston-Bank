@@ -14,7 +14,7 @@ const router = express();
 const upload = multer({ storage });
 
 router
-  .get("/", VToken, Admin, getAllUser)
+  .get("/", getAllUser)
   .get("/profile", VToken, getSingleUser)
   .post("/", upload.single("file"), registerUser)
   .post("/login", login);
