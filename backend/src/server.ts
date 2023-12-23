@@ -14,7 +14,13 @@ const app = express();
 const PORT = process.env.PORT || 2005;
 
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "https:127.0.0.1:5173",
+  })
+);
+app.options("*", cors());
 app.use(cookieParser());
 
 app.use("/users", UserRouter);
