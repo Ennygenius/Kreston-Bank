@@ -1,0 +1,180 @@
+import React, { useEffect, useState } from "react";
+import Navbar from "../../Components/Nav/Navbar";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import s2 from "../../assets/s2.png";
+import {
+  AiFillAppstore,
+  AiFillBank,
+  AiFillCalculator,
+  AiFillHighlight,
+  AiFillProfile,
+  AiFillWallet,
+  AiOutlineAlignRight,
+  AiOutlineClose,
+} from "react-icons/ai";
+import { BiLogOutCircle } from "react-icons/bi";
+import { RiLuggageDepositFill } from "react-icons/ri";
+import { FaHotel } from "react-icons/fa";
+import { RxAvatar } from "react-icons/rx";
+
+const Dashboard = () => {
+  const token = localStorage.getItem("token");
+  const [user, setUser] = useState(null);
+
+  const [nav, setNav] = useState(false);
+  const { id } = useParams();
+  const redirect = useNavigate();
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:3005/users/65436861e0a31fcc71bf95f9`,
+          // `http://127.0.0.1:3005/users/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUser(response.data.user);
+        console.log(response.data.user);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserDetails();
+  }, [token, id]);
+
+  const HandleLogout = () => {
+    if (confirm("Do you want to logout?")) {
+      localStorage.removeItem("token");
+      redirect("/");
+    }
+  };
+
+  const handleNav = () => {
+    setNav(!nav);
+    console.log("clicked");
+  };
+
+  return (
+    <div className="">
+      <div className="topNav py-5 md:py-5 flex justify-between items-center px-10 bg-overlay sticky z-[1] bg-white top-0 pt-5  ">
+        <div className="nav__logo flex items-center">
+          <img src={s2} alt="" />
+          <p className=" md:text-3xl ml-2 font-bold">KRESTON BANK</p>
+        </div>
+
+        <div className="md:hidden cursor-pointer" onClick={handleNav}>
+          {nav ? (
+            <div className="">
+              <AiOutlineClose fontSize={20} color="#CAFF33" />
+            </div>
+          ) : (
+            <div className="bg-btn px-4 py-2 rounded-full">
+              <AiOutlineAlignRight fontSize={20} color="black" />
+            </div>
+          )}
+        </div>
+        <div className="hidden md:flex items-center">
+          <div className="flex items-center pr-2 cursor-pointer">
+            <RxAvatar fontSize={30} />
+            <p className="pl-1">Profile </p>
+          </div>
+          <p className="pl-2 cursor-pointer text-btn" onClick={HandleLogout}>
+            {" "}
+            Logout
+          </p>
+        </div>
+      </div>
+
+      <div className="flex justify-between gap-2">
+        {nav ? (
+          <div className="sideNav bg-overlay w-[30%] px-10 h-[100vh] pt-2 flex-1 md:hidden ">
+            <ul className="text-center">
+              <li className="my-10 py-10">
+                <AiFillBank fontSize={30} color="#CAFF33" />
+              </li>
+              <li className="my-10 py-10">
+                {" "}
+                <AiFillAppstore fontSize={30} color="#CAFF33" />
+              </li>
+              <li className="my-10 py-10">
+                <AiFillHighlight fontSize={30} color="#CAFF33" />
+              </li>
+              <li className="my-10 py-10">
+                <AiFillWallet fontSize={30} color="#CAFF33" />
+              </li>
+              <li className="my-10 py-10">
+                <RiLuggageDepositFill fontSize={30} color="#CAFF33" />
+              </li>
+              <li className="my-10 py-10">
+                <FaHotel fontSize={30} color="#CAFF33" />
+              </li>
+
+              <li className="my-10 py-10">
+                <AiFillCalculator fontSize={30} color="#CAFF33" />
+              </li>
+            </ul>
+            <ul className="text-center">
+              <li className="my-10 py-10">
+                <AiFillProfile fontSize={30} color="#CAFF33" />
+              </li>
+              <li className="my-10 ">
+                <BiLogOutCircle fontSize={30} color="#CAFF33" />
+              </li>
+            </ul>
+          </div>
+        ) : null}
+
+        <div className="sideNav bg-overlay w-[20%] h-[100vh] pt-2 flex-1 md:block hidden">
+          <ul className="text-center">
+            <Link to={"/dashboard"}>
+              <li className="my-10 py-2 flex items-center justify-center">
+                <AiFillBank fontSize={25} color="#CAFF33" />
+                <span className="pl-2"> Home</span>
+              </li>
+            </Link>
+            <Link to={"/transfer"}>
+              <li className="my-10 py-2 flex items-center justify-center">
+                <AiFillAppstore fontSize={25} color="#CAFF33" />
+                <span className="pl-2">Transfer</span>
+              </li>
+            </Link>
+            <li className="my-10 py-2 flex items-center justify-center">
+              <AiFillHighlight fontSize={25} color="#CAFF33" />
+              <span className="pl-2"> Withdraw </span>
+            </li>
+            <li className="my-10 py-2 flex items-center justify-center">
+              <AiFillWallet fontSize={30} color="#CAFF33" />
+              <span className="pl-2"> Request Loan</span>
+            </li>
+            <li className="my-10 py-2 flex items-center justify-center">
+              {" "}
+              <RiLuggageDepositFill fontSize={30} color="#CAFF33" />
+              <span className="pl-2"> Deposit </span>
+            </li>
+            <li className="my-10 py-2 flex items-center justify-center">
+              <AiFillCalculator fontSize={30} color="#CAFF33" />
+              <span className="pl-2"> Reports</span>
+            </li>{" "}
+            <li className="my-10 py-2 flex items-center justify-center">
+              <FaHotel fontSize={30} color="#CAFF33" />
+              <span className="pl-2">Loans</span>
+            </li>
+          </ul>
+        </div>
+        <div className="wjjj pt-5 md:w-[85%] w-[100%] px-2">
+          <h2 className="font-bold tracking-wider py-5">
+            Welcome, <span className="text-btn"> {user.firstName}</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;

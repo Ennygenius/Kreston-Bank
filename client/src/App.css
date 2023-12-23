@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap");
+
+body {
+  background: #1a1a1a;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+}
+
+.card {
+  border: 1px solid #262626;
+}
