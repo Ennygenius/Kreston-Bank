@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 2005;
 
 app.use(express.json());
 
+// app.use(cors());
 // Middleware to enable CORS
 app.use((req, res, next) => {
   res.setHeader(

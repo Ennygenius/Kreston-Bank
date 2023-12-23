@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
+import { BASE } from "../../Hooks/axios/axios";
 
 const EditTrans = () => {
   const [Fetch, setFetch] = useState("");
@@ -20,22 +21,22 @@ const EditTrans = () => {
   const { token } = useContext(AuthContext);
 
   const { id } = useParams();
-  const URI = `http://127.0.0.1:3005/transaction/${id}`;
+  const URI = `/transaction/${id}`;
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const req = await fetch(URI, {
+      const req = await BASE.get(URI, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      const res = await req.json();
-      setFetch(res.trans);
-      console.log(res.trans);
-      setTName(res.trans.TName);
-      setAcctNum(res.trans.AcctNum);
-      setBankName(res.trans.BankName);
-      setTStatus(res.trans.TStatus);
+
+      setFetch(req.data.trans);
+      console.log(req.data.trans);
+      setTName(req.data.trans.TName);
+      setAcctNum(req.data.trans.AcctNum);
+      setBankName(req.data.trans.BankName);
+      setTStatus(req.data.trans.TStatus);
     };
 
     fetchAPI();
