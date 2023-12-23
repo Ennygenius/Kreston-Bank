@@ -79,36 +79,76 @@ const Dashboard = () => {
         {nav ? (
           <div className="sideNav bg-overlay w-[30%] px-10 pt-2 flex-1 md:hidden ">
             <ul className="text-center">
-              <li className="my-10 py-10">
+              <li className="my-10 py-10 ">
                 <AiFillBank fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/dashboard"}>
+                    Home
+                  </Link>
+                </small>
               </li>
               <li className="my-10 py-10">
-                {" "}
                 <AiFillAppstore fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/transfer"}>
+                    Transfer
+                  </Link>
+                </small>
               </li>
               <li className="my-10 py-10">
                 <AiFillHighlight fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/withdraw"}>
+                    Withdraw
+                  </Link>
+                </small>
               </li>
               <li className="my-10 py-10">
                 <AiFillWallet fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/dashboard"}>
+                    Request Loan
+                  </Link>
+                </small>
               </li>
               <li className="my-10 py-10">
                 <RiLuggageDepositFill fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/dashboard"}>
+                    Deposit
+                  </Link>
+                </small>
               </li>
               <li className="my-10 py-10">
                 <FaHotel fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/dashboard"}>
+                    Reports
+                  </Link>
+                </small>
               </li>
 
               <li className="my-10 py-10">
                 <AiFillCalculator fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/dashboard"}>
+                    Loan
+                  </Link>
+                </small>
               </li>
             </ul>
             <ul className="text-center">
               <li className="my-10 py-10">
                 <AiFillProfile fontSize={30} color="#CAFF33" />
+                <small>
+                  <Link className="font-bold" to={"/profile"}>
+                    Profile
+                  </Link>
+                </small>
               </li>
               <li className="my-10 " onClick={HandleLogout}>
                 <BiLogOutCircle fontSize={30} color="#CAFF33" />
+                <small>Logout</small>
               </li>
             </ul>
           </div>
