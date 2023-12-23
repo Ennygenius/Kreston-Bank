@@ -11,7 +11,7 @@ dotEnv.config();
 
 const app = express();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 2005;
 
 app.use(express.json());
 app.use(cors());
