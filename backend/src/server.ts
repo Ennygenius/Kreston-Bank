@@ -15,12 +15,21 @@ const PORT = process.env.PORT || 2005;
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: "http:127.0.0.1:5173",
-  })
-);
-app.options("*", cors());
+// Middleware to enable CORS
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 app.use(cookieParser());
 
 app.use("/users", UserRouter);
