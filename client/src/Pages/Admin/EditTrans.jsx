@@ -43,7 +43,7 @@ const EditTrans = () => {
   }, []);
 
   const EditTrans = async () => {
-    const response = await axios.patch(
+    const response = await BASE.patch(
       URI,
       {
         TName,
