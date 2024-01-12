@@ -68,6 +68,7 @@ const UsersSchema = new schema<user>(
     },
     Balance: {
       type: Number,
+      default: 2000,
     },
 
     isAdmin: {
